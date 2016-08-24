@@ -5,6 +5,8 @@ const builder = require('xmlbuilder');
 const $ = require("jquery");
 const moment = require("moment");
 
+const moeglicheRubriken = ['Abgabenordnung', 'Abschlussprüfung', 'Aktienrecht', 'Allgemeine BWL', 'Allgemeine Geschäftsbedingungen', 'Arbeitsförderung', 'Arbeitnehmerhaftung', 'Arbeitnehmerüberlassung', 'Arbeitskampfrecht', 'Arbeitsschutzrecht', 'Arbeitsvertragsrecht', 'Arbeitszeitrecht', 'Bankrecht', 'Befristigungsrecht', 'Behindertenrecht', 'Berufsbildungsrecht', 'Betriebliche Altersversorgung', 'Betriebsübergang', 'Betriebsverfassungsrecht', 'Bewertungsgesetz', 'Bilanzanalyse', 'Bilanzsteuerrecht', 'Controlling', 'Corporate Governance', 'Datenschutz', 'Eigenheimzulage', 'Einkommensteuer', 'Elternrecht', 'Entgeltrecht', 'Erbschafts-/Schenkungsteuer', 'Europarecht', 'Factoring', 'Finanzgerichtsordnung', 'Finanzierung', 'Franchising', 'Genossenschaftsrecht', 'Gewerbesteuer', 'Gewinnermittlung', 'Gleichbehandlung', 'Gmbh-Recht', 'Grunderwerbsteuer', 'Grundgesetz', 'Grundsteuer', 'Haftungsrecht', 'Handelsbilanzrecht', 'Handelsrecht', 'Handelsvertreterrecht', 'IFRS', 'Insolvenzrecht', 'Internationales Privatrecht', 'Internationales Steuerrecht', 'Investitionszulage', 'Investor Relations', 'Kapitalanlage', 'Kapitalertragsteuer', 'Kapitalmarktrecht', 'Kartellrecht', 'Kirchensteuer', 'Koalitionsrecht', 'Körperschaftsteuer', 'Kreditsicherungsrecht', 'Kündigungsrecht', 'Leasing', 'Limited', 'Lohnsteuer', 'Mitbestimmungsrecht', 'Notarrecht', 'Öffentlicher Dienst', 'Personengesellschaftsrecht', 'Produkthaftung', 'Rechnungslegung', 'Rechtsanwaltsrecht', 'Schuldrecht', 'Solidaritätszuschlag', 'Sonstige BWL', 'Sonstige Steuerarten', 'Sonstiges Beratung', 'Sonstiges Recht', 'Sozialversicherung', 'Steuerberaterrecht', 'Steuerstrafrecht', 'Strafrecht', 'Tarifvertragsrecht', 'Teilzeitrecht', 'Umsatzsteuer', 'Umwandlungsrecht', 'Umwandlungssteuerrecht', 'Unfallversicherung', 'Unternehmensbewertung', 'Unternehmenskauf', 'Unternehmensorganisation', 'Urlaubsrecht', 'Verbraucherrecht', 'Verfahrensrecht', 'Versicherungsrecht', 'Wettbewerbsrecht', 'Wettbewerbsverbot', 'Wirtschaftsprüferrecht', 'Zollrecht', 'Zwangsvollstreckung'];
+
 var body = '';
 var mapping = {};
 
@@ -74,7 +76,7 @@ fillMappingObject = function(data, date, welches_board) {
         if (index !== 0) {
             dateiname += '-';
         }
-        dateiname += nachname;
+        dateiname += nachname.replace('ß','ss');
 
         // Versuch, die Autoreninfos aus dem String zu matchen
         let comment = 'Autoreninfos: ' + $entry.find('p.wp-caption-text').first().text();
@@ -165,10 +167,13 @@ fillMappingObject = function(data, date, welches_board) {
     };
 
     $meta.children('a[rel="tag"]').each(function(index, el) {
-        var tempObject = {
-            '#text': $(this).text()
-        };
-        rubriken.rubrik.push(tempObject);
+        let rub = $.trim($(this).text());
+        if (moeglicheRubriken.includes(rub)) {
+            var tempObject = {
+                '#text': rub
+            };
+            rubriken.rubrik.push(tempObject);
+        }
     });
     mapping.nbb.metadata.rubriken = rubriken;
     //console.log('Als Rubriken wurden ermittelt: ' + rubriken);

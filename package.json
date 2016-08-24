@@ -4,11 +4,13 @@
   "description": "A tool to transform Handelsblatt Blog News into hbfm.dtd valid XML",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package": "electron-packager . hbfm-blogreader-tool --platform=win32 --arch=x64 --out ./dist/hbfm-blogreader-tool --overwrite --icon=./favicon_hbfm.ico"
   },
   "author": "Stefan Maibücher",
   "homepage": "https://www.fachmedien.de",
   "devDependencies": {
+    "electron-packager": "^7.7.0",
     "electron-prebuilt": "^1.2.0"
   },
   "dependencies": {
