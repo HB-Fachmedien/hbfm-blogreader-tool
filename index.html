@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Handelsblatt Blog Konverter</title>
+    <link rel="stylesheet" href="node_modules/material-design-lite/material.min.css">
+    <!--link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"-->
+    <style>
+        body {background-color: aliceblue}
+        .eintrag {cursor: pointer}
+    </style>
+</head>
+
+<body>
+    <div class="mdl-layout mdl-js-layout">
+        <main class="mdl-layout__content">
+            <div class="page-content">
+                
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--10-col mdl-cell--2-offset">
+                        <h1>Handelsblatt Blog Konverter</h1>
+                    </div>
+                </div>
+                
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--4-col mdl-cell--middle mdl-cell--2-offset">
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                            <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked> <span class="mdl-radio__label">Steuerboard</span> </label>
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                            <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2"> <span class="mdl-radio__label">Rechtsboard</span> </label>
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col mdl-cell--middle">
+                        <button id="boardauswahl" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"> Blog Einträge anzeigen... </button>
+                    </div>
+                </div>
+                <div class="mdl-grid">
+                    <div id="blogeintraege"></div>
+                </div>
+                <hr/>
+                
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--10-col mdl-cell--2-offset">
+                        <h4>Oder URL des Blog Eintrags manuell eintragen:</h4>
+                    </div>
+                </div>
+
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--4-col mdl-cell--middle mdl-cell--2-offset">
+                        <form action="#">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="url-input-feld">
+                                <label class="mdl-textfield__label" for="url-input-feld">URL zum Blogeintrag manuell eingeben...</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col mdl-cell--middle">
+                        <button id="url-eingeben" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Blog Eintrag konvertieren... </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+<script>
+    if (typeof module === 'object') {
+        window.module = module;
+        module = undefined;
+    }
+</script>
+<script>
+    // You can also require other files to run in this process
+    var jQuery = require('jquery');
+    require('moment');
+    require('jquery-rss');
+    require('material-design-lite');
+    require('./renderer.js');
+</script>
+
+</html>
