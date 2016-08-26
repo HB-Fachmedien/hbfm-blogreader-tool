@@ -10,6 +10,12 @@ const moeglicheRubriken = ['Abgabenordnung', 'Abschlussprüfung', 'Aktienrecht',
 var body = '';
 var mapping = {};
 
+// Output Ordner erstellen, falls nicht vorhanden
+var dir = './output';
+if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
+}
+
 resetData();
 
 function resetData() {
@@ -63,6 +69,7 @@ fillMappingObject = function(data, date, welches_board) {
     mapping.nbb.metadata.title = $entry.find('h1.entry-title').first().text();
 
     var $autoren = $meta.children('a:contains(",")');
+    //console.log($autoren);
 
     let biography = '';
 
@@ -76,7 +83,7 @@ fillMappingObject = function(data, date, welches_board) {
         if (index !== 0) {
             dateiname += '-';
         }
-        dateiname += nachname.replace('ß','ss');
+        dateiname += nachname.replace('ß','ss').replace(' ', '_');
 
         // Versuch, die Autoreninfos aus dem String zu matchen
         let comment = 'Autoreninfos: ' + $entry.find('p.wp-caption-text').first().text();
