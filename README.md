@@ -11,7 +11,13 @@ git clone https://github.com/...
 cd hbfm-blogreader-tool
 # Install dependencies and run the app
 npm install && npm start
+# Package app
+npm run-script package
 ```
+
+**Blog konvertieren:**
+- Auf den entsprechenden Listeneintrag klicken oder direkt die URL eingeben und mit dem Button die Konvertierung anstoßen.
+- XML Dateien werden dann in den **./output** Ordner gelegt.
 
 **Build with Electron**
 Learn more about Electron and its API in the [documentation](http://electron.atom.io/docs/latest).
