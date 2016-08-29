@@ -6,12 +6,12 @@ To clone and run this repository you'll need [Git](https://git-scm.com) and [Nod
 
 ```bash
 # Clone this repository
-git clone https://github.com/...
+git clone https://github.com/HB-Fachmedien/hbfm-blogreader-tool
 # Go into the repository
 cd hbfm-blogreader-tool
 # Install dependencies and run the app
 npm install && npm start
-# Package app
+# Package app (Windows x64)
 npm run-script package
 ```
 
