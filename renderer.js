@@ -75,6 +75,8 @@ fillMappingObject = function(data, date, welches_board) {
 
     var dateiname = 'BLOG_' + moment(date).format('YYYYMMDD') + '_';
 
+    let bioPrefix = '';
+
     $autoren.each(function(index, el) {
         let vorname = $.trim($(this).text().split(',')[1]);
         let nachname = $.trim($(this).text().split(',')[0]);
@@ -87,11 +89,16 @@ fillMappingObject = function(data, date, welches_board) {
 
         // Versuch, die Autoreninfos aus dem String zu matchen
         let comment = 'Autoreninfos: ' + $entry.find('p.wp-caption-text').first().text();
-        let einzelnde_autoren_array = $entry.find('p.wp-caption-text').first().text().split("und");
+
+        let einzelnde_autoren_array = $entry.find('p.wp-caption-text').first().text().split(" und");
+
+        //console.log(einzelnde_autoren_array);
+        //console.log(nachname);
 
         let zu_untersuchen = '';
 
         for (var i = 0; i < einzelnde_autoren_array.length; i++) {
+            console.log(einzelnde_autoren_array[i].includes(nachname));
             if (einzelnde_autoren_array[i].includes(nachname)) {
                 zu_untersuchen = einzelnde_autoren_array[i];
                 break;
@@ -102,6 +109,8 @@ fillMappingObject = function(data, date, welches_board) {
 
         if (zu_untersuchen !== '') {
             let regex_string_vor_vornamen = new RegExp("(.*?)" + vorname + ".*");
+            //console.log('regex_string_vor_vornamen');
+            //console.log(regex_string_vor_vornamen);
             prefix = $.trim(zu_untersuchen.replace(regex_string_vor_vornamen, "$1"));
 
         } else {
@@ -119,12 +128,18 @@ fillMappingObject = function(data, date, welches_board) {
             'surname': nachname,
             'suffix': ''
         });
+
+        bioPrefix += $.trim(prefix) + ' ' + $.trim(vorname) + ' ' + $.trim(nachname) + ' ';
     });
 
     dateiname += '.xml';
 
     mapping.nbb.metadata.authors.biography = {
-        'p': biography
+        //'p': biography
+        'p' : {
+            'b': $.trim(bioPrefix),
+            '#text' : biography
+        }
     };
 
     let ressort_schluesselwoerter = '';
