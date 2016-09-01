@@ -135,7 +135,7 @@ fillMappingObject = function(data, date, welches_board) {
     dateiname += '.xml';
 
     if (!biography.startsWith(',')) {
-        bioPrefix = $.trim(bioPrefix) + ' ';
+        bioPrefix = $.trim(bioPrefix) + ', ';
     }else{
         bioPrefix = $.trim(bioPrefix);
     }
