@@ -219,8 +219,10 @@ fillMappingObject = function(data, date, welches_board) {
     var regex_delete_a_tags = /<a href=".*?">(.*?)<\/a>/g;
     var regex_delete_empty_spans = /<span.*?>(.*?)<\/span>/g;
     var regex_replace_p_strongs = /<p><strong>(.*?)<\/strong><\/p>/g;
+    var regex_replace_h1 = /h1>/g;
     var regex_replace_h2 = /h2>/g;
     var regex_replace_ul = /<[o|u]l>/g;
+    var regex_replace_ol_with_start = /<ol\sstart.*?>/g;
     var regex_replace_ul_end = /<\/[o|u]l>/g;
     var regex_replace_li = /<li>/g;
     var regex_replace_li_end = /<\/li>/g;
@@ -236,8 +238,10 @@ fillMappingObject = function(data, date, welches_board) {
         .replace(regex_delete_a_tags, '$1')
         .replace(regex_delete_empty_spans, '$1')
         .replace(regex_replace_p_strongs, '<subhead>$1<\/subhead>')
+        .replace(regex_replace_h1, 'subhead>')
         .replace(regex_replace_h2, 'subhead>')
         .replace(regex_replace_ul, '<list type="bullet">')
+        .replace(regex_replace_ol_with_start, '<list type="bullet">')
         .replace(regex_replace_ul_end, '<\/list>')
         .replace(regex_replace_li, '<listitem><p>')
         .replace(regex_replace_li_end, '<\/p><\/listitem>')
